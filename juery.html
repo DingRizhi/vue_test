@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jquery</title>
+    <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+    <div>
+        <input id="input" type="text">
+        <button id="btn">提交</button>
+        <ul id="list"></ul>
+    </div>
+
+    <script>
+        function Page() {
+
+        }
+
+        $.extend(Page.prototype, {
+            init: function () {
+                this.bindEvents()
+            },
+            bindEvents: function () {
+                var btn = $('#btn')
+                btn.on('click', $.proxy(this.handelButtonClick, this))
+            },
+            handelButtonClick: function () {
+                var inputElem = $("#input")
+                var inputValue = inputElem.val()
+                var ulElem = $("#list")
+                ulElem.append("<li>" + inputValue + "</li>")
+                inputElem.val("")
+            }
+        })
+
+        var page = new Page()
+        page.init()
+    </script>
+</body>
+</html>

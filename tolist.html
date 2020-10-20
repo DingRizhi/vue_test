@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ToDoList</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="inputValue">
+        <button v-on:click="submit">提交</button>
+        <ul>
+<!--            <li v-for="item in alist">{{item}}</li>-->
+            <todo-list v-bind:message="item" v-for="item in list"></todo-list>
+        </ul>
+    </div>
+
+    <script>
+        // Vue.component("TodoList", {
+        //     props: ["message"],
+        //     template: "<li> {{message}}</li>"
+        // })
+
+        var TodoList = {
+            props: ["message"],
+            template: "<li> {{message}}</li>"
+        }
+
+        var app = new Vue({
+            el: "#app",
+            components: {
+                TodoList: TodoList
+            },
+            data: {
+                list: ["苹果", "香蕉"],
+                inputValue: ""
+            },
+            methods: {
+                submit: function () {
+                    this.list.push(this.inputValue)
+                    this.inputValue = ""
+                    // alert(this.inputValue)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
