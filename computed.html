@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>计算属性、方法、侦听</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">{{fullName}}</div>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                firstName: "Log",
+                lastName: "Ding",
+                fullName: "Log Ding"
+            },
+            // 计算属性 有缓存机制 只要fullName不改变 就使用上次计算得到的结果 不会重新计算
+            // computed: {
+            //     fullName: function () {
+            //         return this.firstName + this.lastName
+            //     }
+            // },
+
+            // methods: {
+            //     fullName: function () {
+            //         console.log("计算了一次")
+            //         return this.firstName + this.lastName
+            //     }
+            // }
+
+            watch: {
+                firstName: function () {
+                    this.fullName = this.firstName + " " +this.lastName
+                },
+                lastName: function () {
+                    this.fullName = this.firstName + " " +this.lastName
+                }
+            }
+
+        })
+    </script>
+
+</body>
+</html>
