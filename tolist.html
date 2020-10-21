@@ -11,7 +11,7 @@
         <button @click="submit">提交</button>
         <ul>
 <!--            <li v-for="item in alist">{{item}}</li>-->
-            <todo-list v-bind:index="index" v-bind:message="item" v-for="(item,index) in list" @remove="handleOnDelete(this)"></todo-list>
+            <todo-list v-bind:index="index" v-bind:message="item" v-for="(item,index) in list" @remove="handleOnDelete"></todo-list>
         </ul>
     </div>
 
