@@ -2,9 +2,47 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>list 渲染</title>
+    <script src="vue.js"></script>
 </head>
 <body>
-
+    <div id="app">
+        <div v-for="item in list" :key="item.id">
+            {{item.text}}
+        </div>
+        <div v-for="(item, key, index) in userInfo">
+            {{item}} --- {{key}} --- {{index}}
+        </div>
+    </div>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                list: [
+                    {
+                        id: "1001",
+                        text: "hello"
+                    },
+                    {
+                        id: "1002",
+                        text: "world"
+                    },
+                    {
+                        id: "1003",
+                        text: "rizhi"
+                    },
+                    {
+                        id: "1004",
+                        text: "ding"
+                    }
+                ],
+                userInfo: {
+                    name: "log",
+                    age: 33,
+                    male: "gender",
+                }
+            }
+        })
+    </script>
 </body>
 </html>
