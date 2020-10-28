@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue事件绑定</title>
+    <script src="vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="handleClick($event)">button</button>
+        <form action="abc" @click.prevent>
+            <input type="submit">
+        </form>
+        <input @keydown.enter="keydown">
+        <input @keydown.ctrl="keydown1">
+        <input @click.right="keydown1">
+    </div>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+
+            },
+            methods: {
+                handleClick: function (e) {
+                    console.log(e)
+                },
+                handelClick2: function (e) {
+                    e.preventDefault();
+                },
+                keydown: function (e) {
+                    console.log(e.target.value)
+                }
+            }
+        })
+    </script>
+</body>
+</html>
