@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 父子组件</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <counter :content="3" @change="handleChange"></counter>
+        <counter :content="2" @change="handleChange"></counter>
+        <counter  @click.native="nativeClick"></counter>
+        <div>{{total}}</div>
+    </div>
+
+    <script>
+        var counter = {
+            // 参数校验
+            props: {
+                // content: [Number, String]
+                content: {
+                    type: String,
+                    required: false,
+                    default: "hello world",
+                    validator: function (value) {
+                        return (value.length > 5)
+                    }
+                }
+            },
+            data: function(){
+                return {
+                    num: this.content
+                }
+            },
+            template: "<div @click='handleClick'>{{num}}</div>",
+            methods: {
+                handleClick: function () {
+                    this.num ++;
+                    this.$emit("change", 1);
+                },
+                nativeClick: function () {
+                    alert(1)
+                }
+            }
+
+        }
+
+        var app = new Vue({
+            el: "#app",
+            data: {
+                total: 5
+            },
+            components:{
+                counter: counter
+            },
+            methods: {
+                handleChange: function (step) {
+                    this.total += step
+                }
+            }
+        })
+    </script>
+</body>
+</html>

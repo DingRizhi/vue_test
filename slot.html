@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 插槽</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <child>
+            <p class="header" slot="header">哈喽</p>
+            <p class="footer" slot="footer">hello</p>
+        </child>
+
+        <my-child>
+            <template slot-scope="props">
+                <li>{{props.item}}</li>
+            </template>
+        </my-child>
+    </div>
+
+    <script>
+        Vue.component("child", {
+            template: "<div><slot name='header'>插槽默认值</slot><p>你好</p><slot name='footer'>default</slot></div>"
+        })
+
+        Vue.component("my-child", {
+            data: function(){
+                return {
+                    list: [1, 2, 3, 4]
+                }
+            } ,
+            template: "<div><ul><slot v-for='item in list' :item='item'></slot></ul></div>"
+        })
+        var app = new Vue({
+            el: "#app",
+            data: {
+
+            }
+        })
+    </script>
+</body>
+</html>

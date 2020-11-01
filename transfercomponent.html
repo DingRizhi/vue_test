@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 非父子组件的值传递</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <child :content="hello"></child>
+        <child :content="world"></child>
+    </div>
+    <script>
+        Vue.prototype.bus = new Vue()
+        Vue.component("child", {
+            props: {
+                content: String
+            },
+            data: function(){
+              return {
+                  c: this.content
+              }
+            },
+            template: "<div @click='handleClick'>{{c}}</div>",
+            methods: {
+                handleClick: function () {
+                    this.bus.$emit("change", this.c)
+                }
+            },
+            mounted: function () {
+                var this_ = this;
+                this.bus.$on("change", function (msg) {
+                    this_.c = msg;
+                })
+            }
+        })
+        var app = new Vue({
+            el: "#app",
+            data: {
+                hello: "hello",
+                world: "world",
+            }
+        })
+    </script>
+</body>
+</html>
