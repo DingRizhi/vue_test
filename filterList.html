@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue列表过滤</title>
+    <script src="vue.js"></script>
+    <style>
+        .v-enter, .v-leave-to{
+            opacity: 0;
+        }
+        .v-enter-active, .v-leave-active{
+            transition: opacity 3s;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+<!--        <transition-group>-->
+<!--            <div v-for="(item, index) of list" :key="item.id">-->
+<!--                {{item.title }}-->
+<!--            </div>-->
+<!--        </transition-group>-->
+        <fade :show="show">
+            <div>hello world</div>
+        </fade>
+        <button @click="handleBtnClick">Add</button>
+    </div>
+    <script>
+        var count = 0;
+        Vue.component("fade", {
+            props: ['show'],
+            template: "<transition><slot v-if='show'></slot></transition>"
+        })
+        var app = new Vue({
+            el: "#app",
+            data: {
+                show: false,
+                list: []
+            },
+            methods: {
+                handleBtnClick: function () {
+                    this.list.push({
+                        id: ++ count,
+                        title: "hello world"
+                    })
+                    this.show = !this.show;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
