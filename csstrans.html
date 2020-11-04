@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue css 动画</title>
+    <script src="vue.js"></script>
+    <style>
+        .v-enter, .v-leave-active {
+            opacity: 0;
+        }
+        .v-enter-active, .v-leave-active{
+            transition: opacity 3s;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <transition>
+            <div v-if="show">Hello world</div><br>
+        </transition>
+        <button @click="handleChange">change</button>
+    </div>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                show: false
+            },
+            methods: {
+                handleChange: function () {
+                    this.show = !this.show
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>

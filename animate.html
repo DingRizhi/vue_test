@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>animate.css库</title>
+    <link rel="stylesheet" href="animate.css">
+    <script src="vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.0/velocity.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <transition name="test" @before-enter="before" @enter="enter" @after-enter="after" enter-active-class="animate__swing"
+                leave-active-class="animate__shakeY">
+        <div v-if="show">Hello world</div><br>
+    </transition>
+    <button @click="handleChange">change</button>
+</div>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            show: false
+        },
+        methods: {
+            handleChange: function () {
+                this.show = !this.show
+            },
+            before: function (el) {
+                el.style.opacity = 0;            },
+            enter: function (el,done) {
+                Velocity(el, {opacity: 1}, {duration: 1000, complete:done})
+            },
+            after: function (el) {
+                console.log("动画结束")
+            }
+        }
+
+    })
+</script>
+</body>
+</html>
